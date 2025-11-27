@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: customer_orders
+    description: >
+      This mart table aggregates customer order information to provide a
+      comprehensive view of customer purchase behavior including lifetime value,
+      order frequency, and key dates.
+    columns:
+      - name: customer_id
+        description: Primary key for customers
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: Customer's full name
+      - name: first_name
+        description: Customer's first name
+      - name: last_name
+        description: Customer's last name
+      - name: first_order_date
+        description: Date of the customer's first order
+      - name: most_recent_order_date
+        description: Date of the customer's most recent order
+      - name: number_of_orders
+        description: Total number of orders placed by the customer
+      - name: lifetime_value
+        description: >
+          Total amount spent by the customer across all orders.
+          This is calculated by summing all payment amounts.
+
+  - name: order_summary
+    description: >
+      This mart table provides a detailed summary of each order including
+      payment breakdown by method and total order value. Useful for analyzing
+      payment method preferences and order economics.
+    columns:
+      - name: order_id
+        description: Primary key for orders
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+      - name: order_date
+        description: Date the order was placed
+      - name: status
+        description: Current status of the order
+      - name: credit_card_amount
+        description: Amount paid via credit card for this order
+      - name: coupon_amount
+        description: Amount paid via coupon for this order
+      - name: bank_transfer_amount
+        description: Amount paid via bank transfer for this order
+      - name: gift_card_amount
+        description: Amount paid via gift card for this order
+      - name: total_amount
+        description: Total payment amount for the order across all payment methods
+        tests:
+          - not_null

@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staged customer data from the raw customers seed file
+    columns:
+      - name: customer_id
+        description: Primary key for customers
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Customer's first name
+      - name: last_name
+        description: Customer's last name
+      - name: full_name
+        description: Customer's full name (first + last)
+
+  - name: stg_orders
+    description: Staged order data from the raw orders seed file
+    columns:
+      - name: order_id
+        description: Primary key for orders
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+      - name: order_date
+        description: Date the order was placed
+        tests:
+          - not_null
+      - name: status
+        description: Order status (completed, returned, etc.)
+        tests:
+          - accepted_values:
+              values: ['completed', 'returned', 'placed', 'shipped']
+
+  - name: stg_payments
+    description: Staged payment data from the raw payments seed file
+    columns:
+      - name: payment_id
+        description: Primary key for payments
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to orders
+        tests:
+          - not_null
+      - name: payment_method
+        description: Method used for payment
+        tests:
+          - accepted_values:
+              values: ['credit_card', 'coupon', 'bank_transfer', 'gift_card']
+      - name: amount
+        description: Payment amount in dollars
+        tests:
+          - not_null

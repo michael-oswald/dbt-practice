@@ -1,0 +1,57 @@
+# dbt
+target/
+dbt_packages/
+logs/
+dbt_modules/
+
+# Python
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+dbt-env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+docker-compose.override.yml
+
+# Compiled files
+*.compiled.sql
+
+# Package manager
+node_modules/
+package-lock.json
+
+# Profiles (uncomment if you don't want to commit profiles.yml)
+# profiles.yml
+
+# User-specific dbt config
+.user.yml
